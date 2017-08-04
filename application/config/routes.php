@@ -1,4 +1,6 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -17,13 +19,13 @@
 |
 | Please see the user guide for complete details:
 |
-|	http://codeigniter.com/user_guide/general/routing.html
+|	https://codeigniter.com/user_guide/general/routing.html
 |
 | -------------------------------------------------------------------------
 | RESERVED ROUTES
 | -------------------------------------------------------------------------
 |
-| There area two reserved routes:
+| There are three reserved routes:
 |
 |	$route['default_controller'] = 'welcome';
 |
@@ -33,12 +35,23 @@
 |
 |	$route['404_override'] = 'errors/page_missing';
 |
-| This route will tell the Router what URI segments to use if those provided
-| in the URL cannot be matched to a valid route.
+| This route will tell the Router which controller/method to use if those
+| provided in the URL cannot be matched to a valid route.
 |
+|	$route['translate_uri_dashes'] = FALSE;
+|
+| This is not exactly a route, but allows you to automatically route
+| controller and method names that contain dashes. '-' isn't a valid
+| class or method name character, so it requires translation.
+| When you set this option to TRUE, it will replace ALL dashes in the
+| controller and method URI segments.
+|
+| Examples:	my-controller/index	-> my_controller/index
+|		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'user/index';
 $route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
 
 /*admin*/
 $route['admin'] = 'user/index';
@@ -61,8 +74,3 @@ $route['admin/manufacturers/update'] = 'admin_manufacturers/update';
 $route['admin/manufacturers/update/(:any)'] = 'admin_manufacturers/update/$1';
 $route['admin/manufacturers/delete/(:any)'] = 'admin_manufacturers/delete/$1';
 $route['admin/manufacturers/(:any)'] = 'admin_manufacturers/index/$1'; //$1 = page number
-
-
-
-/* End of file routes.php */
-/* Location: ./application/config/routes.php */
